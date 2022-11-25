@@ -1,0 +1,46 @@
+repos:
+-   repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+    -   id: isort
+        name: isort (python)
+        stages: [commit]
+        always_run: true
+        args: [
+            '.'
+        ]
+-   repo: https://github.com/PyCQA/autoflake
+    rev: v1.7.7
+    hooks:
+    -   id: autoflake
+        stages: [commit]
+        args: [
+            '--expand-star-imports',
+            '--ignore-init-module-imports',
+            '--in-place',
+            '--remove-all-unused-imports',
+            '--remove-duplicate-keys',
+            '--remove-unused-variable',
+            '--recursive',
+            '.'
+        ]
+        always_run: true
+-   repo: https://github.com/psf/black
+    rev: 22.8.0
+    hooks:
+    -   id: black
+        always_run: true
+        language_version: python3.10
+        args: [
+            '.'
+        ]
+# -   repo: local
+#     hooks:
+#     -   id: pytest-check
+#         stages: [commit]  
+#         types: [python]
+#         name: pytest-check
+#         entry: pytest tests --disable-warnings  
+#         language: system
+#         pass_filenames: false
+#         always_run: true

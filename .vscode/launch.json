@@ -1,0 +1,75 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: API",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/apps/inventary/api/start.py",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            },
+        },
+        {
+            "name": "Python: Pytest Feature",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+            },
+            // "envFile": "${workspaceFolder}/.env.test",
+            "args": [
+                "-v",
+                "-m",
+                "feature",
+                "--disable-warnings"
+            ]
+        },
+        {
+            "name": "Python: Pytest Unit",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+            },
+            // "envFile": "${workspaceFolder}/.env.test",
+            "args": [
+                "-v",
+                "-m",
+                "unit",
+                "--disable-warnings"
+            ]
+        },
+        {
+            "name": "Python: Pytest All",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+            },
+            // "envFile": "${workspaceFolder}/.env.test",
+            "args": [
+                "tests",
+                // "tests/contexts/inventary/products/infrastucture/persistence/test_mongo_products_repository.py",
+                "--disable-warnings"
+            ]
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}
