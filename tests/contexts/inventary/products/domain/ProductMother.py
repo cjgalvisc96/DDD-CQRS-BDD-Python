@@ -16,13 +16,13 @@ from tests.shared.utils import FakerData
 
 
 class ProductMother:
-    def __init__(self, faker_provider: object = FakerData) -> None:
-        self.faker_provider = faker_provider.faker_data
+    def __init__(self, faker_data: object = FakerData) -> None:
+        self.faker_data = faker_data.faker_data
 
     @staticmethod
     def create(*, data: Dict[str, Any]) -> Product:
         return Product(
-            id=ProductId(data["id"]),
+            product_id=ProductId(data["product_id"]),
             name=ProductName(data["name"]),
             status=ProductStatus(data["status"]),
             stock=ProductStock(data["stock"]),
@@ -32,9 +32,9 @@ class ProductMother:
 
     def create_random_valid(self) -> Product:
         random_valid_product_data = {
-            "id": self.faker_data.uuid4(),
+            "product_id": self.faker_data.uuid4(),
             "name": self.faker_data.name(),
-            "status": self.faker_data.random_element(elements=(1, 0)),
+            "status": 1,
             "stock": self.faker_data.pyint(max_value=100),
             "description": self.faker_data.paragraph(nb_sentences=1),
             "price": self.faker_data.pyfloat(
@@ -49,7 +49,7 @@ class ProductMother:
         product_creator_request_dto: ProductCreatorRequestDTO,
     ) -> Product:
         data = {
-            "id": product_creator_request_dto.id,
+            "product_id": product_creator_request_dto.product_id,
             "name": product_creator_request_dto.name,
             "status": product_creator_request_dto.status,
             "stock": product_creator_request_dto.stock,

@@ -21,20 +21,20 @@ class MongoProductRepository(ProductRepository):
     @staticmethod
     async def save(*, product: Product) -> Product | bool:
         update_result = await ProductMongo.find_one(
-            ProductMongo.id
+            ProductMongo.ProductId
             == UUID(
-                product.id.value,
+                product.product_id.value,
                 version=DomainConstants["uuid_version"],
             )
         ).upsert(
             Set({}),
             on_insert=ProductMongo(
-                id=product.id.value,
+                ProductId=product.product_id.value,
                 name=product.name.value,
                 status=product.status.value,
                 stock=product.stock.value,
                 description=product.description.value,
-                price=product.description.value,
+                price=product.price.value,
             ),
         )
         if isinstance(update_result, UpdateResult):
@@ -49,11 +49,11 @@ class MongoProductRepository(ProductRepository):
     @staticmethod
     async def search(*, product_id: str) -> Product:
         product = await ProductMongo.find_one(
-            ProductMongo.id
+            ProductMongo.ProductId
             == UUID(hex=product_id, version=DomainConstants["uuid_version"])
         )
         return Product(
-            id=ProductId(str(product.id)),
+            product_id=ProductId(str(product.product_id)),
             name=ProductName(product.name),
             status=ProductStatus(product.status),
             stock=ProductStock(product.stock),

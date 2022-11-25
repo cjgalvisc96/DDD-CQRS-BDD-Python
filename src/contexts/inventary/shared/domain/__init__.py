@@ -1,1 +1,1 @@
-from .products import *
+from .products.ProductId import ProductId

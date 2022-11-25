@@ -2,6 +2,7 @@ import pytest
 
 from src.contexts.inventary.products.infrastructure import (
     MongoProductRepository,
+    ProductMongo,
 )
 from tests.contexts.inventary.products.domain import ProductMother
 
@@ -9,18 +10,21 @@ from tests.contexts.inventary.products.domain import ProductMother
 @pytest.mark.unit
 @pytest.mark.asyncio
 async def test_save_product(mongo_db):
-    repository = MongoProductRepository()
     product = ProductMother().create_random_valid()
+    repository = MongoProductRepository()
     await repository.save(product=product)
-    # TODO: USE native DB for get product saved
-    product_founded = await repository.search(product_id=product.id.value)
+    products = await ProductMongo.find_all().to_list()
 
-    assert product_founded.id.value == product.id.value
-    assert product_founded.name.value == product.name.value
-    assert product_founded.status.value == product.status.value
-    assert product_founded.stock.value == product.stock.value
-    assert product_founded.description.value == product.description.value
-    assert product_founded.price.value == product.price.value
+    assert len(products) == 1
+    product_founded = products[0]
+    assert isinstance(product_founded, ProductMongo)
+
+    assert str(product_founded.ProductId) == product.product_id.value
+    assert product_founded.name == product.name.value
+    assert product_founded.status == product.status.value
+    assert product_founded.stock == product.stock.value
+    assert product_founded.description == product.description.value
+    assert product_founded.price == product.price.value
 
 
 @pytest.mark.unit

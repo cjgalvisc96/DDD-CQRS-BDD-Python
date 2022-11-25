@@ -6,8 +6,9 @@ repos:
         name: isort (python)
         stages: [commit]
         always_run: true
+        exclude: __init__.py
         args: [
-            '.'
+            '.',
         ]
 -   repo: https://github.com/PyCQA/autoflake
     rev: v1.7.7
@@ -34,13 +35,13 @@ repos:
         args: [
             '.'
         ]
-# -   repo: local
-#     hooks:
-#     -   id: pytest-check
-#         stages: [commit]  
-#         types: [python]
-#         name: pytest-check
-#         entry: pytest tests --disable-warnings  
-#         language: system
-#         pass_filenames: false
-#         always_run: true
+-   repo: local
+    hooks:
+    -   id: pytest-check
+        stages: [commit]  
+        types: [python]
+        name: pytest-check
+        entry: pytest tests --disable-warnings  
+        language: system
+        pass_filenames: false
+        always_run: true

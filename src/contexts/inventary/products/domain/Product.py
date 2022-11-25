@@ -14,7 +14,7 @@ class Product:
     def __init__(
         self,
         *,
-        id: ProductId,
+        product_id: ProductId,
         name: ProductName,
         status: ProductStatus,
         stock: ProductStock,
@@ -23,7 +23,7 @@ class Product:
         discount: ProductDiscount = 0.0,
         final_price: ProductFinalPrice = 0.0,
     ) -> None:
-        self.id = id
+        self.product_id = product_id
         self.name = name
         self.status = status
         self.stock = stock
@@ -35,7 +35,7 @@ class Product:
     @staticmethod
     def create(
         *,
-        id: str,
+        product_id: str,
         name: str,
         status: int,
         stock: int,
@@ -45,7 +45,7 @@ class Product:
         final_price: float = 0.0,
     ):
         product = Product(
-            id=ProductId(id),
+            product_id=ProductId(product_id),
             name=ProductName(name),
             status=ProductStatus(status),
             stock=ProductStock(stock),
@@ -58,7 +58,7 @@ class Product:
 
     def to_primitives(self):
         return {
-            "id": self.id.value,
+            "product_id": self.product_id.value,
             "name": self.name.value,
             "status": self.status.value,
             "stock": self.stock.value,
