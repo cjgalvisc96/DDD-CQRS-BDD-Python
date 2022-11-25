@@ -47,13 +47,16 @@ class MongoProductRepository(ProductRepository):
         ...
 
     @staticmethod
-    async def search(*, product_id: str) -> Product:
+    async def search_by_product_id(*, product_id: str) -> Product | bool:
         product = await ProductMongo.find_one(
             ProductMongo.ProductId
             == UUID(hex=product_id, version=DomainConstants["uuid_version"])
         )
+        if not product:
+            return False
+
         return Product(
-            product_id=ProductId(str(product.product_id)),
+            product_id=ProductId(str(product.ProductId)),
             name=ProductName(product.name),
             status=ProductStatus(product.status),
             stock=ProductStock(product.stock),

@@ -13,5 +13,5 @@ class ProductRepository(ABC):
         ...
 
     @abstractstaticmethod
-    async def search(*, product_id: str) -> Product:
+    async def search_by_product_id(*, product_id: str) -> Product:
         ...

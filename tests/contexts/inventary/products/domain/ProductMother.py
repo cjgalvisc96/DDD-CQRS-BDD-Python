@@ -43,6 +43,9 @@ class ProductMother:
         }
         return self.create(data=random_valid_product_data)
 
+    def get_random_valid_uuid4(self):
+        return self.faker_data.uuid4()
+
     def create_from_product_creator_request_dto(
         self,
         *,
