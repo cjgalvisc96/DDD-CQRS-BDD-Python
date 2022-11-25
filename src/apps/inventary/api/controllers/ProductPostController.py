@@ -32,10 +32,10 @@ class ProductPostValidator(BaseModel):
         return product_id
 
     @validator("status")
-    def validate_status(cls, name):
+    def validate_status(cls, status):
         if status not in [1, 0]:
             raise ValueError("status needs to be 1 or 0")
-        return name
+        return status
 
 
 class ProductPostController:
@@ -48,7 +48,12 @@ class ProductPostController:
         ),
     ):
         product_creator_request_dto = ProductCreatorRequestDTO(
-            id=product.id, name=product.name, duration=product.duration
+            product_id=product.product_id,
+            name=product.name,
+            status=product.status,
+            stock=product.stock,
+            description=product.description,
+            price=product.price,
         )
 
         creator_result = await product_creator.run(

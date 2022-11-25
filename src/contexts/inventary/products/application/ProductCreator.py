@@ -10,6 +10,11 @@ class ProductCreator:
 
     async def run(self, *, request: ProductCreatorRequestDTO):
         product = Product.create(
-            id=request.id, name=request.name, duration=request.duration
+            product_id=request.product_id,
+            name=request.name,
+            status=request.status,
+            stock=request.stock,
+            description=request.description,
+            price=request.price,
         )
         return await self._repository.save(product=product)

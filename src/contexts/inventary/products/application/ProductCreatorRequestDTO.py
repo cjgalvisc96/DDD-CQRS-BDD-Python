@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class ProductCreatorRequestDTO:
-    id: str
+    product_id: str
     name: str
     status: int
     stock: int

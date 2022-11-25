@@ -1,0 +1,39 @@
+Feature: Create a new product
+    Scenario: A invalid product_id
+        Given I send a POST request to "/api/products" with body:
+            {
+                "product_id": "-8d7f-49cc-abec-78e0d05af80a",
+                "name": "Invalid ID", 
+                "status": 1,
+                "stock": 10,
+                "description": "Test description",
+                "price": 100.0
+            }
+        Then The response status code should be "422"
+        And The response body should have msg="product_id need to be a valid uuid" and type="value_error" 
+
+    Scenario: A invalid status
+        Given I send a POST request to "/api/products" with body:
+            {
+                "product_id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
+                "name": "Invalid Status", 
+                "status": 3,
+                "stock": 10,
+                "description": "Test description",
+                "price": 100.0
+            }
+        Then The response status code should be "422"
+        And The response body should have msg="status needs to be 1 or 0" and type="value_error"
+
+    Scenario: A valid non-existent product
+        Given I send a POST request to "/api/products" with body:
+            {
+                "product_id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
+                "name": "Invalid Status", 
+                "status": 1,
+                "stock": 10,
+                "description": "Test description",
+                "price": 100.0
+            }
+        Then The response status code should be "201"
+        And The response body should be empty

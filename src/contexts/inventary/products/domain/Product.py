@@ -13,7 +13,6 @@ from src.contexts.inventary.shared.domain import ProductId
 class Product:
     def __init__(
         self,
-        *,
         product_id: ProductId,
         name: ProductName,
         status: ProductStatus,
