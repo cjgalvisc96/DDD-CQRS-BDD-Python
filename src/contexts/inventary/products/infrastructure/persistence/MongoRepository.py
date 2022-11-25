@@ -43,8 +43,25 @@ class MongoProductRepository(ProductRepository):
         return product
 
     @staticmethod
-    async def update(*, product_id: str) -> Product:
-        ...
+    async def update(*, product_id: str, data_to_update: dict) -> bool:
+        update_result = await ProductMongo.find_one(
+            ProductMongo.ProductId
+            == UUID(
+                product_id,
+                version=DomainConstants["uuid_version"],
+            )
+        ).update(
+            Set(
+                {
+                    ProductMongo.name: data_to_update["name"],
+                    ProductMongo.status: data_to_update["status"],
+                    ProductMongo.stock: data_to_update["stock"],
+                    ProductMongo.description: data_to_update["description"],
+                    ProductMongo.price: data_to_update["price"],
+                }
+            ),
+        )
+        return True if update_result.modified_count == 1 else False
 
     @staticmethod
     async def search_by_product_id(*, product_id: str) -> Product | bool:

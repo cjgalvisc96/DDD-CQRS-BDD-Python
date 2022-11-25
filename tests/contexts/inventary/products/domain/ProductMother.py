@@ -46,6 +46,17 @@ class ProductMother:
     def get_random_valid_uuid4(self):
         return self.faker_data.uuid4()
 
+    def get_random_valid_data_to_update_product(self):
+        return {
+            "name": self.faker_data.name(),
+            "status": 1,
+            "stock": self.faker_data.pyint(max_value=100),
+            "description": self.faker_data.paragraph(nb_sentences=1),
+            "price": self.faker_data.pyfloat(
+                right_digits=2, positive=True, min_value=1.0, max_value=1000.0
+            ),
+        }
+
     def create_from_product_creator_request_dto(
         self,
         *,
