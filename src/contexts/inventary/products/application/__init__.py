@@ -1,1 +1,2 @@
 from .ProductCreatorRequestDTO import ProductCreatorRequestDTO
+from .ProductCreator import ProductCreator
