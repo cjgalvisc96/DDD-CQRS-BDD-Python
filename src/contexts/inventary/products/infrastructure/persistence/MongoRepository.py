@@ -12,9 +12,7 @@ from src.contexts.inventary.products.domain import (
     ProductStatus,
     ProductStock,
 )
-from src.contexts.inventary.products.infrastructure.persistence.models import (
-    ProductMongo,
-)
+from src.contexts.inventary.products.infrastructure import ProductMongo
 from src.contexts.inventary.shared.domain import ProductId
 from src.contexts.shared.domain import DomainConstants
 
