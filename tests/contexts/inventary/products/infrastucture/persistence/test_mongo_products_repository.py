@@ -1,6 +1,6 @@
 import pytest
 
-from src.contexts.inventary.products.domain import Product
+from src.contexts.inventary.products.domain.Product import Product
 from src.contexts.inventary.products.infrastructure import (
     MongoProductRepository,
     ProductMongo,

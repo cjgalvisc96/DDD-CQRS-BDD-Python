@@ -4,7 +4,6 @@ from beanie.operators import Set
 from pymongo.results import UpdateResult
 
 from src.contexts.inventary.products.domain import (
-    Product,
     ProductDescription,
     ProductName,
     ProductPrice,
@@ -12,6 +11,7 @@ from src.contexts.inventary.products.domain import (
     ProductStatus,
     ProductStock,
 )
+from src.contexts.inventary.products.domain.Product import Product
 from src.contexts.inventary.products.infrastructure import ProductMongo
 from src.contexts.inventary.shared.domain import ProductId
 from src.contexts.shared.domain import DomainConstants

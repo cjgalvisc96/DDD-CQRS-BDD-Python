@@ -1,4 +1,3 @@
-from .Product import Product
 from .ProductName import ProductName
 from .ProductStatus import ProductStatus
 from .ProductStock import ProductStock

@@ -68,8 +68,12 @@ def check_response_status(http_request, expected_status):
 )
 def check_invalid_response_validations_body(http_request, msg: str, type: str):
     json_response = http_request.json()
-    assert json_response["detail"][0]["msg"] == msg
-    assert json_response["detail"][0]["type"] == type
+    if type == "value_error":
+        assert json_response["detail"][0]["msg"] == msg
+        assert json_response["detail"][0]["type"] == type
+    elif type == "domain_error":
+        assert json_response["error"] == msg
+        assert json_response["type"] == type
 
 
 @then(
@@ -88,7 +92,7 @@ def check_empty_response_body(http_request):
     )
 )
 def check_logger_debug_calls(logging_logger_mock, call_times: int):
-    assert logging_logger_mock.info_mock.call_count == call_times
+    assert logging_logger_mock.debug_mock.call_count == call_times
 
 
 @then(

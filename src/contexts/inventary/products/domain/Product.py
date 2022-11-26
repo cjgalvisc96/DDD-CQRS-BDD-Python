@@ -19,8 +19,8 @@ class Product:
         stock: ProductStock,
         description: ProductDescription,
         price: ProductPrice,
-        discount: ProductDiscount = 0.0,
-        final_price: ProductFinalPrice = 0.0,
+        discount: ProductDiscount = 1.0,
+        final_price: ProductFinalPrice = 1.0,
     ) -> None:
         self.product_id = product_id
         self.name = name
@@ -40,8 +40,8 @@ class Product:
         stock: int,
         description: str,
         price: float,
-        discount: float = 0.0,
-        final_price: float = 0.0,
+        discount: float = 1.0,
+        final_price: float = 1.0,
     ):
         product = Product(
             product_id=ProductId(product_id),

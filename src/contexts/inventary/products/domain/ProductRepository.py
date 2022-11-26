@@ -1,6 +1,6 @@
 from abc import ABC, abstractstaticmethod
 
-from src.contexts.inventary.products.domain import Product
+from src.contexts.inventary.products.domain.Product import Product
 
 
 class ProductRepository(ABC):

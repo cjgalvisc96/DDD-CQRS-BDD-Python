@@ -1,7 +1,8 @@
 from src.contexts.inventary.products.application import (
     ProductCreatorRequestDTO,
 )
-from src.contexts.inventary.products.domain import Product, ProductRepository
+from src.contexts.inventary.products.domain import ProductRepository
+from src.contexts.inventary.products.domain.Product import Product
 
 
 class ProductCreator:

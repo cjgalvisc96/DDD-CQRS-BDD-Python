@@ -2,7 +2,6 @@ import uuid
 
 from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends, status
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel, validator
 
 from src.apps.inventary.api.dependecy_injection import InventaryContainer
@@ -10,7 +9,7 @@ from src.contexts.inventary.products.application import (
     ProductCreator,
     ProductCreatorRequestDTO,
 )
-from src.contexts.shared.domain import DomainConstants
+from src.contexts.shared.domain import DomainConstants, DomainException
 
 router = APIRouter(prefix="/products", tags=["products"])
 
@@ -60,9 +59,4 @@ class ProductPostController:
             request=product_creator_request_dto
         )
         if not creator_result:
-            return JSONResponse(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                content={
-                    "error": "Product already exists",
-                },
-            )
+            raise DomainException("Product already exists")

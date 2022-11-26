@@ -20,11 +20,19 @@ def test_create_product_with_invalid_status():
     ...
 
 
-# TODO: fix
 @pytest.mark.feature
 @scenario(
     "../features/products/create_product.feature",
     "A valid non-existent product",
 )
-def xtest_create_non_existent_product_with_valid_body():
+def test_create_non_existent_product_with_valid_body():
+    ...
+
+
+@pytest.mark.feature
+@scenario(
+    "../features/products/create_product.feature",
+    "A valid existent product",
+)
+def test_create_existent_product_with_valid_body():
     ...

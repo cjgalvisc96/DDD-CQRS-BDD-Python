@@ -4,13 +4,13 @@ from src.contexts.inventary.products.application import (
     ProductCreatorRequestDTO,
 )
 from src.contexts.inventary.products.domain import (
-    Product,
     ProductDescription,
     ProductName,
     ProductPrice,
     ProductStatus,
     ProductStock,
 )
+from src.contexts.inventary.products.domain.Product import Product
 from src.contexts.inventary.shared.domain import ProductId
 from tests.shared.utils import FakerData
 

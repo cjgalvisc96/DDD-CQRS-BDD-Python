@@ -64,9 +64,7 @@ class InventaryAPI:
         async def domain_exception(request, exc):
             return JSONResponse(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                content={
-                    "error": str(exc),
-                },
+                content={"error": str(exc), "type": "domain_error"},
             )
 
     def _create_app(self):
