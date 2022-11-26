@@ -11,6 +11,8 @@ Feature: Create a new product
             }
         Then The response status code should be "422"
         And The response body should have msg="product_id need to be a valid uuid" and type="value_error" 
+        And Logger DEBUG was called "2" time(s)
+        And Logger INFO was called "2" time(s)
 
     Scenario: A invalid status
         Given I send a POST request to "/api/products" with body:
@@ -24,6 +26,8 @@ Feature: Create a new product
             }
         Then The response status code should be "422"
         And The response body should have msg="status needs to be 1 or 0" and type="value_error"
+        And Logger DEBUG was called "2" time(s)
+        And Logger INFO was called "2" time(s)
 
     Scenario: A valid non-existent product
         Given I send a POST request to "/api/products" with body:

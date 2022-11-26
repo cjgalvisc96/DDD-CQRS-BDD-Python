@@ -1,27 +1,44 @@
 import json
 
+import pytest
 import pytest_asyncio
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from pytest_bdd import given, parsers, then
 
-from src.apps.inventary.api import InventaryAPI
+from src.apps.inventary.api.InventaryAPI import InventaryAPI
 from src.contexts.inventary import inventary_settings
+from src.contexts.shared.domain import DomainConstants
 from tests.contexts.shared import LoggingLoggerMock
 from tests.shared.utils import clear_mongo_database, mongo_connection
 
 
-@pytest_asyncio.fixture()
-async def app() -> FastAPI:
-    mooc_app = InventaryAPI(
+@pytest.fixture
+def logging_logger_mock():
+    return LoggingLoggerMock(
+        filename="logTest/logsTest.txt",
+        name="DomainLoggerTest",
+        level=DomainConstants["logger_level"],
+        format_=DomainConstants["logger_format"],
+        date_format=DomainConstants["logger_date_format"],
+    )
+
+
+@pytest.fixture
+def inventary_test_api(logging_logger_mock):
+    return InventaryAPI(
         port=inventary_settings.API_PORT,
-        logger=LoggingLoggerMock(),
+        logger=logging_logger_mock,
         db=mongo_connection(),
     )
-    client_db = mooc_app.db
+
+
+@pytest_asyncio.fixture()
+async def app(inventary_test_api) -> FastAPI:
+    client_db = inventary_test_api.db
     await client_db.init_db()  # to simulate start() event
     await clear_mongo_database(mongo_db=client_db.db)
-    return mooc_app.app
+    return inventary_test_api.app
 
 
 @given(
@@ -63,3 +80,21 @@ def check_invalid_response_validations_body(http_request, msg: str, type: str):
 def check_empty_response_body(http_request):
     json_response = http_request.json()
     assert not json_response
+
+
+@then(
+    parsers.parse(
+        'Logger DEBUG was called "{call_times:d}" time(s)',
+    )
+)
+def check_logger_debug_calls(logging_logger_mock, call_times: int):
+    assert logging_logger_mock.info_mock.call_count == call_times
+
+
+@then(
+    parsers.parse(
+        'Logger INFO was called "{call_times:d}" time(s)',
+    )
+)
+def check_logger_info_calls(logging_logger_mock, call_times: int):
+    assert logging_logger_mock.info_mock.call_count == call_times

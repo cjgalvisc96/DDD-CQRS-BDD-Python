@@ -1,5 +1,8 @@
+import time
+from uuid import uuid4
+
 import uvicorn
-from fastapi import FastAPI, status
+from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -23,7 +26,7 @@ class InventaryAPI:
     def _add_router(self) -> None:
         self.app.include_router(router=router, prefix="/api")
 
-    def _add_middleware(self) -> None:
+    def _add_cors_middleware(self) -> None:
         self.app.add_middleware(
             middleware_class=CORSMiddleware,
             allow_origins=["*"],
@@ -32,11 +35,29 @@ class InventaryAPI:
             allow_headers=["*"],
         )
 
+    def _add_logger_middleware(self) -> None:
+        @self.app.middleware("http")
+        async def add_process_time_header(request: Request, call_next):
+            start_time = time.time()
+            message = (
+                f"ID={uuid4()}",
+                f"Server={request.scope.get('server')},"
+                f"Method={request.scope.get('method')},"
+                f"Url={request.scope.get('path')}",
+            )
+            self.logger.info(message=f"[RequestStart]{message}")
+            response = await call_next(request)
+            process_time = time.time() - start_time
+            self.logger.info(
+                message=f"[RequestEnd]{message} => ProccesTime={process_time}"
+            )
+            return response
+
     def _add_database(self):
         @self.app.on_event("startup")
         async def startup() -> None:
             await self.db.init_db()
-            self.logger.info(message="DB is Up!")
+            self.logger.debug(message="DB is Up!")
 
     def _add_domain_exceptions(self) -> None:
         @self.app.exception_handler(DomainException)
@@ -52,12 +73,13 @@ class InventaryAPI:
         self._add_dependency_injection()
         self._add_router()
         self._add_database()
-        self._add_middleware()
+        self._add_cors_middleware()
+        self._add_logger_middleware()
         self._add_domain_exceptions()
 
     def start(self):
-        self.logger.info(
-            message=f"Inventary App is running at http://localhost:{self.port}"
-        )
-        self.logger.info(message="Press CTRL-C to stop")
-        uvicorn.run(app=self.app, port=self.port, log_level="info")
+        try:
+            self.logger.debug(message="Server is Up!")
+            uvicorn.run(app=self.app, port=self.port, log_level="info")
+        except Exception as error:
+            self.logger.error(message=f"[ERROR]start()=>{error}")

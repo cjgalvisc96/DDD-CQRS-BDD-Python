@@ -20,6 +20,7 @@ def test_create_product_with_invalid_status():
     ...
 
 
+# TODO: fix
 @pytest.mark.feature
 @scenario(
     "../features/products/create_product.feature",

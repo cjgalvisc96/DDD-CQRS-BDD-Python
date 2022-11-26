@@ -4,32 +4,31 @@ from src.contexts.shared.infrastucture import LoggingLogger
 
 
 class LoggingLoggerMock(LoggingLogger):
-    def __init__(self) -> None:
-        super().__init__()
-        self.__debug_mock = MagicMock()
-        self.__error_mock = MagicMock()
-        self.__info_mock = MagicMock()
+    def __init__(
+        self,
+        *,
+        filename: str,
+        name: str,
+        level: str,
+        format_: str,
+        date_format: str,
+    ) -> None:
+        super().__init__(
+            filename=filename,
+            name=name,
+            level=level,
+            format_=format_,
+            date_format=date_format,
+        )
+        self.debug_mock = MagicMock()
+        self.error_mock = MagicMock()
+        self.info_mock = MagicMock()
 
     def debug(self, *, message: str):
-        self.__debug_mock(message=message)
+        self.debug_mock(message=message)
 
     def error(self, *, message: str):
-        self.__error_mock(message=message)
+        self.error_mock(message=message)
 
     def info(self, *, message: str):
-        self.__info_mock(message=message)
-
-    def debug_has_been_called_with(self, *, expected_message: str):
-        self.__debug_mock.assert_called_once()
-        message_displayed = self.__debug_mock.call_args.kwargs["message"]
-        assert message_displayed == expected_message
-
-    def error_has_been_called_with(self, *, expected_message: str):
-        self.__error_mock.assert_called_once()
-        message_displayed = self.__error_mock.call_args.kwargs["message"]
-        assert message_displayed == expected_message
-
-    def info_has_been_called_with(self, *, expected_message: str):
-        self.__info_mock.assert_called_once()
-        message_displayed = self.__info_mock.call_args.kwargs["message"]
-        assert message_displayed == expected_message
+        self.info_mock(message=message)

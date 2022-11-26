@@ -1,18 +1,21 @@
 from functools import lru_cache
 
+from dotenv import load_dotenv
 from pydantic import BaseSettings
+
+load_dotenv()
 
 
 class Settings(BaseSettings):
-    API_PORT: int = 5000
-    MONGO_URL: str = "mongodb://localhost:27017/inventary_dev"
-    EXTERNAL_PARTY_SERVICE: str = "https://mockapi.io"
+    API_PORT: int
+    MONGO_URL: str
+    EXTERNAL_PARTY_SERVICE: str
     # TESTS
-    TEST_MONGO_URL: str = "mongodb://localhost:27017/inventary_test"
+    TEST_MONGO_URL: str
 
     class Config:
         case_sensitive = True
-        env_file = ".env"  # TODO: Fix file read
+        env_file = ".env"
 
 
 @lru_cache()
