@@ -7,6 +7,7 @@ class InventaryContainer(containers.DeclarativeContainer):
     wiring_config = containers.WiringConfiguration(
         modules=[
             "src.apps.inventary.api.controllers.ProductPostController",
+            "src.apps.inventary.api.controllers.ProductQueryController",
         ]
     )
     products_package = providers.Container(ProductsContainer)

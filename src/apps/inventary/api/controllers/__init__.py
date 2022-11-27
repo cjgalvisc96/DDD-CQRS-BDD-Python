@@ -1,1 +1,2 @@
 from .ProductPostController import router as product_post_controller_router
+from .ProductQueryController import router as product_query_controller_router

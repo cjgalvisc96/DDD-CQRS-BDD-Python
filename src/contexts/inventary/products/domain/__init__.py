@@ -7,3 +7,4 @@ from .ProductDiscount import ProductDiscount
 from .ProductFinalPrice import ProductFinalPrice
 from .ProductInvalidStatusValue import ProductInvalidStatusValue
 from .ProductRepository import ProductRepository
+from .ProductReadRepository import ProductReadRepository

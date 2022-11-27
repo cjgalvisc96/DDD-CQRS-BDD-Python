@@ -1,44 +1,19 @@
-import uuid
-
 from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends, status
-from pydantic import BaseModel, validator
 
 from src.apps.inventary.api.dependecy_injection import InventaryContainer
+from src.apps.inventary.api.validators import ProductPostValidator
 from src.contexts.inventary.products.application import (
     ProductCreator,
     ProductCreatorRequestDTO,
 )
-from src.contexts.shared.domain import DomainConstants, DomainException
+from src.contexts.shared.domain import DomainException
 
-router = APIRouter(prefix="/products", tags=["products"])
-
-
-class ProductPostValidator(BaseModel):
-    product_id: str
-    name: str
-    status: int
-    stock: int
-    description: str
-    price: float
-
-    @validator("product_id")
-    def validate_product_id(cls, product_id):
-        try:
-            uuid.UUID(hex=product_id, version=DomainConstants["uuid_version"])
-        except ValueError:
-            raise ValueError("product_id need to be a valid uuid")
-        return product_id
-
-    @validator("status")
-    def validate_status(cls, status):
-        if status not in [1, 0]:
-            raise ValueError("status needs to be 1 or 0")
-        return status
+router = APIRouter(prefix="", tags=["WriteProduct"])
 
 
 class ProductPostController:
-    @router.post("", status_code=status.HTTP_201_CREATED)
+    @router.post("/", status_code=status.HTTP_201_CREATED)
     @inject
     async def run(
         product: ProductPostValidator,

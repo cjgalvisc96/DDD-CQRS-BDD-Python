@@ -1,2 +1,5 @@
 from .ProductCreatorRequestDTO import ProductCreatorRequestDTO
 from .ProductCreator import ProductCreator
+from .queries.ProductQueryIdDTO import ProductQueryIdDTO
+from .queries.ProductQueryService import ProductQueryService
+from .queries.ProductQueryServiceImp import ProductQueryServiceImp
