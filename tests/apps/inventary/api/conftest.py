@@ -1,4 +1,5 @@
 import json
+from unittest.mock import AsyncMock
 
 import pytest
 import pytest_asyncio
@@ -54,6 +55,18 @@ def send_post_request(app, endpoint, body):
     return http_request
 
 
+@given(
+    parsers.parse(
+        'I send a GET request to "{endpoint}"',
+    ),
+    target_fixture="http_request",
+)
+def send_get_request(monkeypatch, app, endpoint):
+    with TestClient(app) as client:
+        http_request = client.get(url=endpoint)
+    return http_request
+
+
 @then(
     parsers.parse('The response status code should be "{expected_status:d}"')
 )
@@ -63,17 +76,12 @@ def check_response_status(http_request, expected_status):
 
 @then(
     parsers.parse(
-        'The response body should have msg="{msg}" and type="{type}"',
+        "The response body should be:\n{response_body:json}",
+        extra_types=dict(json=json.loads),
     )
 )
-def check_invalid_response_validations_body(http_request, msg: str, type: str):
-    json_response = http_request.json()
-    if type == "value_error":
-        assert json_response["detail"][0]["msg"] == msg
-        assert json_response["detail"][0]["type"] == type
-    elif type == "domain_error":
-        assert json_response["error"] == msg
-        assert json_response["type"] == type
+def check_error_response(http_request, response_body: dict):
+    assert sorted(http_request.json()) == sorted(response_body)
 
 
 @then(
@@ -102,3 +110,19 @@ def check_logger_debug_calls(logging_logger_mock, call_times: int):
 )
 def check_logger_info_calls(logging_logger_mock, call_times: int):
     assert logging_logger_mock.info_mock.call_count == call_times
+
+
+@given(
+    parsers.parse(
+        'External discount service with response "{discount:d}"',
+    )
+)
+def external_discount_service_mock(monkeypatch, discount: int):
+    monkeypatch.setattr(
+        (
+            f"src.contexts.inventary.products.infrastructure.external_services."
+            f"discounts.MockAPIIOExternalDiscountService."
+            f"MockAPIIOExternalDiscountService.get_discount_percentage"
+        ),
+        AsyncMock(return_value=discount),
+    )

@@ -1,14 +1,13 @@
 from uuid import UUID
 
 from dependency_injector.wiring import Provide, inject
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, HTTPException, status
 
 from src.apps.inventary.api.dependecy_injection import InventaryContainer
 from src.contexts.inventary.products.application import (
     ProductQueryIdDTO,
     ProductQueryService,
 )
-from src.contexts.shared.domain import DomainException
 
 router = APIRouter(prefix="", tags=["ReadProducts"])
 
@@ -30,6 +29,6 @@ class ProductQueryController:
             product_id=str(product_id)
         )
         if not product:
-            raise DomainException("Product don't exists")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
         return product

@@ -10,7 +10,15 @@ Feature: Create a new product
                 "price": 100.0
             }
         Then The response status code should be "422"
-        And The response body should have msg="product_id need to be a valid uuid" and type="value_error" 
+        And The response body should be:
+            {
+                "detail": [
+                    {
+                        "msg":"product_id need to be a valid uuid",
+                        "type": "value_error" 
+                    }
+                ]
+            } 
         And Logger DEBUG was called "1" time(s)
         And Logger INFO was called "2" time(s)
 
@@ -25,7 +33,15 @@ Feature: Create a new product
                 "price": 100.0
             }
         Then The response status code should be "422"
-        And The response body should have msg="status needs to be 1 or 0" and type="value_error"
+        And The response body should be:
+            {
+                "detail": [
+                    {
+                        "msg":"status needs to be 1 or 0",
+                        "type": "value_error" 
+                    }
+                ]
+            } 
         And Logger DEBUG was called "1" time(s)
         And Logger INFO was called "2" time(s)
 
@@ -64,7 +80,11 @@ Feature: Create a new product
                 "price": 100.0
             }
         Then The response status code should be "400"
-        And The response body should have msg="Product already exists" and type="domain_error"
+        And The response body should be:
+            {
+                "error": "Product already exists",
+                "type": "domain_error" 
+            } 
         And Logger DEBUG was called "2" time(s)
         And Logger INFO was called "4" time(s)
 
