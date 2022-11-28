@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class ProductCreatorRequestDTO:
+class ProductCreateCommand:
     product_id: str
     name: str
     status: int

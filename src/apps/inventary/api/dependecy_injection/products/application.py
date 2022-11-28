@@ -1,12 +1,12 @@
 from dependency_injector import containers, providers
 
 from src.contexts.inventary.products.application import (
-    ProductCreator,
+    ProductCommandServiceImp,
     ProductQueryServiceImp,
 )
 from src.contexts.inventary.products.infrastructure import (
     MongoProductReadRepository,
-    MongoProductRepository,
+    MongoProductWriteRepository,
 )
 from src.contexts.inventary.products.infrastructure.external_services import (
     MockAPIIOExternalDiscountService,
@@ -14,8 +14,11 @@ from src.contexts.inventary.products.infrastructure.external_services import (
 
 
 class ProductsContainer(containers.DeclarativeContainer):
-    product_repository = providers.Factory(MongoProductRepository)
-    product_creator = providers.Factory(ProductCreator, product_repository)
+    product_write_repository = providers.Factory(MongoProductWriteRepository)
+    product_write_service = providers.Factory(
+        ProductCommandServiceImp,
+        product_write_repository,
+    )
 
     product_read_repository = providers.Factory(MongoProductReadRepository)
     external_discount_service = providers.Factory(

@@ -1,8 +1,5 @@
 from typing import Any, Dict
 
-from src.contexts.inventary.products.application import (
-    ProductCreatorRequestDTO,
-)
 from src.contexts.inventary.products.domain import (
     ProductDescription,
     ProductName,
@@ -56,18 +53,3 @@ class ProductMother:
                 right_digits=2, positive=True, min_value=1.0, max_value=1000.0
             ),
         }
-
-    def create_from_product_creator_request_dto(
-        self,
-        *,
-        product_creator_request_dto: ProductCreatorRequestDTO,
-    ) -> Product:
-        data = {
-            "product_id": product_creator_request_dto.product_id,
-            "name": product_creator_request_dto.name,
-            "status": product_creator_request_dto.status,
-            "stock": product_creator_request_dto.stock,
-            "description": product_creator_request_dto.description,
-            "price": product_creator_request_dto.price,
-        }
-        return self.create(data=data)

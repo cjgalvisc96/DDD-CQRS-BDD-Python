@@ -1,5 +1,8 @@
-from .ProductCreatorRequestDTO import ProductCreatorRequestDTO
-from .ProductCreator import ProductCreator
+from .commands.ProductCreateCommand import ProductCreateCommand
+from .commands.ProductUpdateCommand import ProductUpdateCommand
+from .commands.ProductCommandService import ProductCommandService
+from .commands.ProductCommandServiceImp import ProductCommandServiceImp
+
 from .queries.ProductQueryIdDTO import ProductQueryIdDTO
 from .queries.ProductQueryService import ProductQueryService
 from .queries.ProductQueryServiceImp import ProductQueryServiceImp
