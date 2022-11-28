@@ -1,5 +1,6 @@
 from src.contexts.inventary.products.domain import ProductWriteRepository
 from src.contexts.inventary.products.domain.Product import Product
+from src.contexts.shared.domain import DomainException
 
 from .ProductCommandService import ProductCommandService
 from .ProductCreateCommand import ProductCreateCommand
@@ -22,9 +23,15 @@ class ProductCommandServiceImp(ProductCommandService):
             description=product_create_command.description,
             price=product_create_command.price,
         )
-        return await self._repository.save(product=product)
+        result = await self._repository.save(product=product)
+        if not result:
+            raise DomainException("Product already exists")
 
     async def update(
         self, *, product_id: str, product_update_command: ProductUpdateCommand
     ):
-        ...
+        result = await self._repository.update(
+            product_id=product_id, data=product_update_command.to_dict()
+        )
+        if not result:
+            raise DomainException("Product don't exists")

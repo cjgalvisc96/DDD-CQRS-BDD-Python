@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from uuid import UUID
 
 from beanie.operators import Set
@@ -32,7 +33,7 @@ class MongoProductWriteRepository(ProductWriteRepository):
         return False if isinstance(update_result, UpdateResult) else True
 
     @staticmethod
-    async def update(*, product_id: str, data: dict) -> bool:
+    async def update(*, product_id: str, data: Dict[str, Any]) -> bool:
         update_result = await ProductMongo.find_one(
             ProductMongo.ProductId
             == UUID(

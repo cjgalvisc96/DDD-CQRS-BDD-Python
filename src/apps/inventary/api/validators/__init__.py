@@ -1,1 +1,2 @@
 from .ProductPostValidator import ProductPostValidator
+from .ProductPutValidator import ProductPutValidator

@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 
 
 @dataclass
@@ -8,3 +8,6 @@ class ProductUpdateCommand:
     stock: int
     description: str
     price: float
+
+    def to_dict(self):
+        return {k: v for k, v in asdict(self).items()}
