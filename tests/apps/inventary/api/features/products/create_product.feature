@@ -70,6 +70,7 @@ Feature: Create a new product
                 "description": "Test description",
                 "price": 100.0
             }
+        Then The response status code should be "201"
         Given I send a POST request to "/api/products/" with body:
             {
                 "product_id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",

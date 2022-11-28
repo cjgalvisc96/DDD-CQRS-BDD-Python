@@ -10,6 +10,6 @@ class ValueObject(ABC):
         self.value = value
 
     @staticmethod
-    def _ensure_value_is_defined(*, value: Any) -> None:
-        if not value:
+    def _ensure_value_is_defined(*, value: Any) -> None | InvalidArgumentError:
+        if value is None:
             raise InvalidArgumentError("Value must be defined")

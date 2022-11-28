@@ -19,6 +19,7 @@ Feature: Get a product by product_id
                 "description": "Test description",
                 "price": 100.0
             }
+        Then The response status code should be "201"
         Given External discount service with response "10" 
         Given I send a GET request to "/api/products/ef8ac118-8d7f-49cc-abec-78e0d05af80a"
         Then The response status code should be "200"

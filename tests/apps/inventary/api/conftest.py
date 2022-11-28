@@ -57,6 +57,19 @@ def send_post_request(app, endpoint, body):
 
 @given(
     parsers.parse(
+        'I send a PUT request to "{endpoint}" with body:\n{body:json}',
+        extra_types=dict(json=json.loads),
+    ),
+    target_fixture="http_request",
+)
+def send_put_request(app, endpoint, body):
+    with TestClient(app) as client:
+        http_request = client.put(url=endpoint, json=body)
+    return http_request
+
+
+@given(
+    parsers.parse(
         'I send a GET request to "{endpoint}"',
     ),
     target_fixture="http_request",
