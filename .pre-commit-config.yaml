@@ -1,19 +1,31 @@
 repos:
--   repo: https://github.com/pycqa/isort
-    rev: 5.10.1
+-   repo: local
     hooks:
-    -   id: isort
-        name: isort (python)
-        stages: [commit]
+    -   id: black-local
+        stages: [commit]  
+        types: [python]
+        name: black-local
+        entry: black . 
+        language: system
+        pass_filenames: false
         always_run: true
-        exclude: __init__.py
-        args: [
-            '.',
-        ]
+
+-   repo: local
+    hooks:
+    -   id: isort-local
+        stages: [commit]  
+        types: [python]
+        name: isort-local
+        entry: isort . 
+        language: system
+        pass_filenames: false
+        always_run: true
+
 -   repo: https://github.com/PyCQA/autoflake
     rev: v1.7.7
     hooks:
     -   id: autoflake
+        name: autoflake-cloud
         stages: [commit]
         args: [
             '--expand-star-imports',
@@ -26,21 +38,13 @@ repos:
             '.'
         ]
         always_run: true
--   repo: https://github.com/psf/black
-    rev: 22.8.0
-    hooks:
-    -   id: black
-        always_run: true
-        language_version: python3.10
-        args: [
-            '.'
-        ]
+
 -   repo: local
     hooks:
-    -   id: pytest-check
+    -   id: pytest-local
         stages: [commit]  
         types: [python]
-        name: pytest-check
+        name: pytest-local
         entry: pytest tests --disable-warnings  
         language: system
         pass_filenames: false

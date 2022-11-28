@@ -19,7 +19,6 @@ httpx = "^0.23.1"
 pytest-bdd = "^6.0.1"
 isort = "^5.10.1"
 black = "^22.10.0"
-autoflake = "^1.7.7"
 coverage = "^6.5.0"
 pytest = "^7.2.0"
 requests = "^2.28.1"
@@ -39,15 +38,6 @@ line_length = 79
 target-version = ["py310"]
 include = '\.pyi?$'
 line-length = 79
-
-[tool.flakehell]
-max_line_length = 79
-max-complexity = 18
-show_source = true
-
-[tool.flakehell.plugins]
-# include everything in pyflakes except F401
-pyflakes = ["+*", "-F401"]
 
 [tool.pytest.ini_options]
 minversion = 2.0
