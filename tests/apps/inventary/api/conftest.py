@@ -28,6 +28,7 @@ def logging_logger_mock():
 @pytest.fixture
 def inventary_test_api(logging_logger_mock):
     return InventaryAPI(
+        host=inventary_settings.API_HOST,
         port=inventary_settings.API_PORT,
         logger=logging_logger_mock,
         db=mongo_connection(),

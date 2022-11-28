@@ -42,3 +42,11 @@
 27-Nov-22 16:40:18 | DomainLogger | INFO | [RequestEnd]('ID=74128df4-c625-4a19-9d03-067f37d0a6ec', "Server=('127.0.0.1', 5000),Method=POST,Url=/api/products") => ProccesTime=0.0007693767547607422
 27-Nov-22 16:40:18 | DomainLogger | INFO | [RequestStart]('ID=5fdf7637-fdff-4a8c-b6a9-0fd7f7024e82', "Server=('127.0.0.1', 5000),Method=POST,Url=/api/products/")
 27-Nov-22 16:40:18 | DomainLogger | INFO | [RequestEnd]('ID=5fdf7637-fdff-4a8c-b6a9-0fd7f7024e82', "Server=('127.0.0.1', 5000),Method=POST,Url=/api/products/") => ProccesTime=0.0016727447509765625
+28-Nov-22 10:47:01 | DomainLogger | INFO | [RequestStart]('ID=ce85ca56-7838-47ac-8915-920124b032d4', "Server=('127.0.0.1', 5000),Method=GET,Url=/docs")
+28-Nov-22 10:47:01 | DomainLogger | INFO | [RequestEnd]('ID=ce85ca56-7838-47ac-8915-920124b032d4', "Server=('127.0.0.1', 5000),Method=GET,Url=/docs") => ProccesTime=0.001672506332397461
+28-Nov-22 10:47:01 | DomainLogger | INFO | [RequestStart]('ID=8c20ea79-2771-4d50-9141-05b5207d85a5', "Server=('127.0.0.1', 5000),Method=GET,Url=/openapi.json")
+28-Nov-22 10:47:01 | DomainLogger | INFO | [RequestEnd]('ID=8c20ea79-2771-4d50-9141-05b5207d85a5', "Server=('127.0.0.1', 5000),Method=GET,Url=/openapi.json") => ProccesTime=0.00939488410949707
+28-Nov-22 10:47:04 | DomainLogger | INFO | [RequestStart]('ID=b8c1f95e-f1ae-43d0-a71c-9c36f1e12731', "Server=('127.0.0.1', 5000),Method=GET,Url=/docs")
+28-Nov-22 10:47:04 | DomainLogger | INFO | [RequestEnd]('ID=b8c1f95e-f1ae-43d0-a71c-9c36f1e12731', "Server=('127.0.0.1', 5000),Method=GET,Url=/docs") => ProccesTime=0.0007772445678710938
+28-Nov-22 10:47:05 | DomainLogger | INFO | [RequestStart]('ID=58f7e791-7245-4209-9e32-6c6904cb5bbc', "Server=('127.0.0.1', 5000),Method=GET,Url=/openapi.json")
+28-Nov-22 10:47:05 | DomainLogger | INFO | [RequestEnd]('ID=58f7e791-7245-4209-9e32-6c6904cb5bbc', "Server=('127.0.0.1', 5000),Method=GET,Url=/openapi.json") => ProccesTime=0.0009338855743408203

@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   api:
-    container_name: fastapi_api
+    container_name: inventary_api
     build:
       context: ${PWD}
       dockerfile: Dockerfile
@@ -10,15 +10,14 @@ services:
       - .env
     volumes:
       - .:/code
-    command: "uvicorn applications.application_api.app:app --host 0.0.0.0 --reload --port 8000"
+    command: "python src/apps/inventary/api/start.py"
     ports:
-      - "8000:8000"
+      - ${API_PORT}:${API_PORT}
+    depends_on:
+      - mongo 
 
   mongo:
     image: mongo
-    environment:
-      - MONGO_URL=mongodb://mongo:27017
-    volumes:
-      - ../data/mongo:/data/db:delegated
+    restart: always
     ports:
       - 27017:27017

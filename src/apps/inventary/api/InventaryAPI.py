@@ -13,7 +13,10 @@ from src.contexts.shared.infrastucture import DBConnection
 
 
 class InventaryAPI:
-    def __init__(self, *, port: int, logger: Logger, db: DBConnection) -> None:
+    def __init__(
+        self, *, host: str, port: int, logger: Logger, db: DBConnection
+    ) -> None:
+        self.host = host
         self.port = port
         self.logger = logger
         self.db = db
@@ -78,6 +81,8 @@ class InventaryAPI:
     def start(self):
         try:
             self.logger.debug(message="Server is Up!")
-            uvicorn.run(app=self.app, port=self.port, log_level="info")
+            uvicorn.run(
+                app=self.app, host=self.host, port=self.port, log_level="info"
+            )
         except Exception as error:
             self.logger.error(message=f"[ERROR]start()=>{error}")

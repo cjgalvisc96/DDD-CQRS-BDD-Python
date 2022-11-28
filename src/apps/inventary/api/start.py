@@ -9,6 +9,7 @@ from src.contexts.shared.infrastucture import LoggingLogger
 
 # TODO: try to  implement DependencyInjection
 inventary_api = InventaryAPI(
+    host=inventary_settings.API_HOST,
     port=inventary_settings.API_PORT,
     logger=LoggingLogger(
         filename=DomainConstants["logger_filename"],
