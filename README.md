@@ -59,6 +59,11 @@ Using the library [beanie](https://github.com/roman-right/beanie) with the  asyn
 *Implementation*
 <img src="./images/persistenceImplementation.png" width=100%/>
 
+*File =>* [MongoConnection](./src/contexts/inventary/products/infrastructure/persistence/MongoConnection.py)
+
+*File =>* [MongoProductWriteRepository](./src/contexts/inventary/products/infrastructure/persistence/master/MongoProductWriteRepository.py)
+
+*File =>* [MongoProductReadRepository](./src/contexts/inventary/products/infrastructure/persistence/slave/MongoProductReadRepository.py)
 ### **3. Cache**
 Using the library [fastapi_cache](https://github.com/comeuplater/fastapi_cache) with *MemoryCache*
 
@@ -66,12 +71,17 @@ Using the library [fastapi_cache](https://github.com/comeuplater/fastapi_cache) 
 
 <img src="./images/cacheServiceImplementation.png" width=40%/>
 
+*File =>* [MemoryCacheService](./src/contexts/inventary/products/infrastructure/cache/MemoryCacheService.py)
+
+
 ### **4. Web server**
 Using the asynchronous framework [fastapi](https://fastapi.tiangolo.com/) with ASGI web server [uvicorn](https://www.uvicorn.org/) 
 
 *Implementation*
 
 <img src="./images/fastapiImplementation.png"  width=30%/>
+
+*File =>* [InventaryFastAPI](./src/apps/inventary/api/InventaryFastAPI.py)
 
 ### **5. Logger**
 Check the file in *[DirProject]/log/logs.txt*
@@ -82,12 +92,17 @@ Check the file in *[DirProject]/log/logs.txt*
 
 <img src="./images/loggerImplementation.png"  width=30%/>
 
+*File =>* [LoggingLogger](./src/contexts/shared/infrastucture/LoggingLogger.py)
+
+
 ### **6. External Discount Service**
 Check the mock api => https://638391421ada9475c80319c0.mockapi.io/api/discounts
 
 *Implementation*
 
 <img src="./images/ExternalDiscountServiceImplementation.png"  width=50% height=50%/>
+
+*File =>* [MockAPIIOExternalDiscountService](./src/contexts/inventary/products/infrastructure/external_services/discounts/MockAPIIOExternalDiscountService.py)
 
 ## **Stack**
 The technologies used for this project were the following:
