@@ -51,7 +51,7 @@ The architecture used to do scalable and maintainable the project was *Hexagonal
 <img src="./images/treeTests.png"  width=25%/>
 
 ### **2. Persitence**
-Using the library [beanie](https://github.com/roman-right/beanie) with the  asyncronos implementation using the driver [motor](https://motor.readthedocs.io/en/stable/) with CQRS master/slave strategy
+Using the library [beanie](https://github.com/roman-right/beanie) with the  asyncronous implementation using the driver [motor](https://motor.readthedocs.io/en/stable/) with CQRS master/slave strategy
 
 *Implementation*
 <img src="./images/persistenceImplementation.png" width=100%/>
@@ -64,7 +64,7 @@ Using the library [fastapi_cache](https://github.com/comeuplater/fastapi_cache) 
 <img src="./images/cacheServiceImplementation.png" width=40%/>
 
 ### **4. Web server**
-Using the asynchronos framework [fastapi](https://fastapi.tiangolo.com/) with ASGI web server [uvicorn](https://www.uvicorn.org/) 
+Using the asynchronous framework [fastapi](https://fastapi.tiangolo.com/) with ASGI web server [uvicorn](https://www.uvicorn.org/) 
 
 *Implementation*
 
