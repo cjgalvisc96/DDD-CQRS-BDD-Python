@@ -12,6 +12,9 @@
    ```sh
     >>[DirProject] make start
    ```
+
+   <img src="./images/Docker.png"  width=90%/>
+
 3. *Stop app*
    ```sh
     >>[DirProject] make stop

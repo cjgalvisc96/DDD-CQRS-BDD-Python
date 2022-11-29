@@ -8,8 +8,6 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
-    volumes:
-      - .:/code
     command: "python src/apps/inventary/api/start.py"
     ports:
       - ${API_PORT}:${API_PORT}
