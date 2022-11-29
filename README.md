@@ -57,14 +57,14 @@ Using the library [beanie](https://github.com/roman-right/beanie) with the  asyn
 <img src="./images/persistenceImplementation.png" width=100%/>
 
 ### **3. Cache**
-Using the library [fastapi_cache](https://github.com/comeuplater/fastapi_cache)
+Using the library [fastapi_cache](https://github.com/comeuplater/fastapi_cache) with *MemoryCache*
 
 *Implementation*
 
 <img src="./images/cacheServiceImplementation.png" width=40%/>
 
 ### **4. Web server**
-Using the asynchronos framework[fastapi](https://fastapi.tiangolo.com/) with ASGI web server implementation [uvicorn](https://www.uvicorn.org/) 
+Using the asynchronos framework [fastapi](https://fastapi.tiangolo.com/) with ASGI web server [uvicorn](https://www.uvicorn.org/) 
 
 *Implementation*
 
