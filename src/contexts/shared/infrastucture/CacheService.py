@@ -3,7 +3,7 @@ from abc import ABC, abstractstaticmethod
 
 class CacheService(ABC):
     @abstractstaticmethod
-    async def init(self):
+    async def init():
         ...
 
     @abstractstaticmethod

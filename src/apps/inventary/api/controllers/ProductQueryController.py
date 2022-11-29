@@ -1,4 +1,3 @@
-from typing import Any
 from uuid import UUID
 
 from dependency_injector.wiring import Provide, inject
@@ -15,14 +14,16 @@ from src.contexts.shared.infrastucture import CacheService
 router = APIRouter(prefix="", tags=["ReadProducts"])
 
 
-async def apply_cache_to_product(
-    *, product: ProductQueryIdDTO, cache: Any
+async def apply_cache_in_status_field(
+    *, product: ProductQueryIdDTO, cache_service: CacheService
 ) -> ProductQueryIdDTO:
-    in_cache = await cache.get("Status")
-    if not in_cache:
+    cache = cache_service.get_cache()
+    status_in_cache = await cache.get("Status")
+    if not status_in_cache:
         await cache.set(
             key="Status",
             value=product.status,
+            ttl=cache_service.cache_ttl,
         )
         return product
 
@@ -50,9 +51,11 @@ class ProductQueryController:
         if not product:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
-        product_with_cache_applied = await apply_cache_to_product(
-            product=product,
-            cache=cache_service.get_cache(),
+        product_with_cache_applied_in_status_field = (
+            await apply_cache_in_status_field(
+                product=product,
+                cache_service=cache_service,
+            )
         )
 
-        return product_with_cache_applied
+        return product_with_cache_applied_in_status_field

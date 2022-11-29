@@ -1,15 +1,18 @@
 from fastapi_cache import CacheRegistry, caches, close_caches
 from fastapi_cache.backends.memory import CACHE_KEY, InMemoryCacheBackend
 
+from src.contexts.inventary.config import inventary_settings
 from src.contexts.shared.infrastucture import CacheService, Singlenton
 
 
 class MemoryCacheService(Singlenton, CacheService):
-    async def init(self):
-        memory_cache_backend = InMemoryCacheBackend()
+    def __init__(self) -> None:
+        self.cache_ttl = inventary_settings.CACHE_TTL
+
+    @staticmethod
+    async def init():
         caches.flush()
-        # TODO: expiration time in VARS
-        # await redis_cache_backend.expire(key=CACHE_KEY, ttl=60)
+        memory_cache_backend = InMemoryCacheBackend()
         caches.set(name=CACHE_KEY, cache=memory_cache_backend)
 
     @staticmethod
