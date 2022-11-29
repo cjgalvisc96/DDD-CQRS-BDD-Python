@@ -1,7 +1,7 @@
-from abc import ABC, abstractstaticmethod
+from abc import ABC, abstractmethod
 
 
 class DBConnection(ABC):
-    @abstractstaticmethod
+    @abstractmethod
     async def init_db(self):
         ...

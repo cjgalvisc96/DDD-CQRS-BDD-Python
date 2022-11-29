@@ -9,6 +9,7 @@ from pytest_bdd import given, parsers, then
 
 from src.apps.inventary.api.InventaryAPI import InventaryAPI
 from src.contexts.inventary import inventary_settings
+from src.contexts.inventary.products.infrastructure import MemoryCacheService
 from src.contexts.shared.domain import DomainConstants
 from tests.contexts.shared import LoggingLoggerMock
 from tests.shared.utils import clear_mongo_database, mongo_connection
@@ -26,19 +27,29 @@ def logging_logger_mock():
 
 
 @pytest.fixture
-def inventary_test_api(logging_logger_mock):
+def memory_cache_service():
+    return MemoryCacheService()
+
+
+@pytest.fixture
+def inventary_test_api(logging_logger_mock, memory_cache_service):
     return InventaryAPI(
         host=inventary_settings.API_HOST,
         port=inventary_settings.API_PORT,
         logger=logging_logger_mock,
         db=mongo_connection(),
+        cache_service=memory_cache_service,
     )
 
 
 @pytest_asyncio.fixture()
 async def app(inventary_test_api) -> FastAPI:
     client_db = inventary_test_api.db
-    await client_db.init_db()  # to simulate start() event
+    cache_service = inventary_test_api.cache_service
+    # to simulate start() event
+    await client_db.init_db()
+    await cache_service.init()
+
     await clear_mongo_database(mongo_db=client_db.db)
     return inventary_test_api.app
 

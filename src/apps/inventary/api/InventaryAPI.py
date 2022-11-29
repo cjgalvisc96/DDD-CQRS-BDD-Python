@@ -9,17 +9,24 @@ from fastapi.responses import JSONResponse
 from src.apps.inventary.api.dependecy_injection import InventaryContainer
 from src.apps.inventary.api.routes import products_router
 from src.contexts.shared.domain import DomainException, Logger
-from src.contexts.shared.infrastucture import DBConnection
+from src.contexts.shared.infrastucture import CacheService, DBConnection
 
 
 class InventaryAPI:
     def __init__(
-        self, *, host: str, port: int, logger: Logger, db: DBConnection
+        self,
+        *,
+        host: str,
+        port: int,
+        logger: Logger,
+        db: DBConnection,
+        cache_service=CacheService,
     ) -> None:
         self.host = host
         self.port = port
         self.logger = logger
         self.db = db
+        self.cache_service = cache_service
         self.app = FastAPI()
         self._create_app()
 
@@ -56,11 +63,20 @@ class InventaryAPI:
             )
             return response
 
-    def _add_database(self):
+    def _add_startup_events(self):
         @self.app.on_event("startup")
         async def startup() -> None:
             await self.db.init_db()
             self.logger.debug(message="DB is Up!")
+
+            await self.cache_service.init()
+            self.logger.debug(message="CACHE_SERVICE is Up!")
+
+    def _add_shutdown_events(self):
+        @self.app.on_event("shutdown")
+        async def shutdown() -> None:
+            await self.cache_service.close()
+            self.logger.debug(message="CACHE_SERVICE is Down!")
 
     def _add_domain_exceptions(self) -> None:
         @self.app.exception_handler(DomainException)
@@ -73,7 +89,8 @@ class InventaryAPI:
     def _create_app(self):
         self._add_dependency_injection()
         self._add_routers()
-        self._add_database()
+        self._add_startup_events()
+        self._add_shutdown_events()
         self._add_cors_middleware()
         self._add_logger_middleware()
         self._add_domain_exceptions()

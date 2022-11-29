@@ -6,7 +6,7 @@ Feature: Get a product by product_id
             {
                 "detail": "Not Found"
             } 
-        And Logger DEBUG was called "1" time(s)
+        And Logger DEBUG was called "3" time(s)
         And Logger INFO was called "2" time(s)
 
     Scenario: A existent product
@@ -34,6 +34,6 @@ Feature: Get a product by product_id
                 "discount":10.0,
                 "final_price":90.0
             }
-        And Logger DEBUG was called "2" time(s)
+        And Logger DEBUG was called "6" time(s)
         And Logger INFO was called "4" time(s)
 

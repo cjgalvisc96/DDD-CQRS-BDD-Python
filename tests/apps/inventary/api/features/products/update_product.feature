@@ -14,7 +14,7 @@ Feature: Update a new product
                 "error": "Product don't exists",
                 "type": "domain_error" 
             } 
-        And Logger DEBUG was called "1" time(s)
+        And Logger DEBUG was called "3" time(s)
         And Logger INFO was called "2" time(s)
 
     Scenario: A existent product
@@ -51,5 +51,5 @@ Feature: Update a new product
                 "discount": 10.0,
                 "final_price": 180.0
             }
-        And Logger DEBUG was called "3" time(s)
+        And Logger DEBUG was called "9" time(s)
         And Logger INFO was called "6" time(s)

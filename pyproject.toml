@@ -14,6 +14,7 @@ beanie = "^1.13.1"
 dependency-injector = "^4.40.0"
 python-dotenv = "^0.21.0"
 httpx = "^0.23.1"
+fastapi-cache = "^0.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest-bdd = "^6.0.1"

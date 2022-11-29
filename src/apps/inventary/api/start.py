@@ -1,13 +1,13 @@
 from src.apps.inventary.api import InventaryAPI
 from src.contexts.inventary import inventary_settings
 from src.contexts.inventary.products.infrastructure import (
+    MemoryCacheService,
     MongoConnection,
     __beanie_models__,
 )
 from src.contexts.shared.domain import DomainConstants
 from src.contexts.shared.infrastucture import LoggingLogger
 
-# TODO: try to  implement DependencyInjection
 inventary_api = InventaryAPI(
     host=inventary_settings.API_HOST,
     port=inventary_settings.API_PORT,
@@ -21,7 +21,9 @@ inventary_api = InventaryAPI(
     db=MongoConnection(
         db_url=inventary_settings.MONGO_URL, models=__beanie_models__
     ),
+    cache_service=MemoryCacheService(),
 )
+
 if __name__ == "__main__":
     try:
         inventary_api.start()

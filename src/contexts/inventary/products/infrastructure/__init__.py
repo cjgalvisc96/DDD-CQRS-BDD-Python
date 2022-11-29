@@ -8,5 +8,6 @@ from .persistence.master.MongoProductWriteRepository import (
 from .persistence.slave.MongoProductReadRepository import (
     MongoProductReadRepository,
 )
+from .cache.MemoryCacheService import MemoryCacheService
 
 __beanie_models__: List[Any] = [ProductMongo]

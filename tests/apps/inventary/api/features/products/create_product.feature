@@ -19,7 +19,7 @@ Feature: Create a new product
                     }
                 ]
             } 
-        And Logger DEBUG was called "1" time(s)
+        And Logger DEBUG was called "3" time(s)
         And Logger INFO was called "2" time(s)
 
     Scenario: A invalid status
@@ -42,7 +42,7 @@ Feature: Create a new product
                     }
                 ]
             } 
-        And Logger DEBUG was called "1" time(s)
+        And Logger DEBUG was called "3" time(s)
         And Logger INFO was called "2" time(s)
 
     Scenario: A valid non-existent product
@@ -57,7 +57,7 @@ Feature: Create a new product
             }
         Then The response status code should be "201"
         And The response body should be empty
-        And Logger DEBUG was called "1" time(s)
+        And Logger DEBUG was called "3" time(s)
         And Logger INFO was called "2" time(s)
 
     Scenario: A valid existent product
@@ -86,6 +86,6 @@ Feature: Create a new product
                 "error": "Product already exists",
                 "type": "domain_error" 
             } 
-        And Logger DEBUG was called "2" time(s)
+        And Logger DEBUG was called "6" time(s)
         And Logger INFO was called "4" time(s)
 
