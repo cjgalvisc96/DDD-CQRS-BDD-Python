@@ -27,7 +27,7 @@ Feature: Get a product by product_id
             {
                 "product_id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
                 "name": "Valid Product", 
-                "status": 1,
+                "status": "Active",
                 "stock": 10,
                 "description": "Test description",
                 "price": 100.0,

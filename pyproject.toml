@@ -60,7 +60,7 @@ show_missing=true
 include=[
     "./src/*",
 ]
-sort="-Miss"
+sort="Cover"
 precision=2
 
 [build-system]

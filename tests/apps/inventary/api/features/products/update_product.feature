@@ -44,12 +44,12 @@ Feature: Update a new product
             {
                 "product_id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
                 "name": "Update Name", 
-                "status": 0,
+                "status": "Inactive",
                 "stock": 20,
                 "description": "Update description",
                 "price": 200.0,
-                "discount": 10.0,
-                "final_price": 180.0
+                "discount": 20.0,
+                "final_price": 160.0
             }
         And Logger DEBUG was called "9" time(s)
         And Logger INFO was called "6" time(s)

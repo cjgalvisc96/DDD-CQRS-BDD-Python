@@ -105,8 +105,8 @@ def check_response_status(http_request, expected_status):
         extra_types=dict(json=json.loads),
     )
 )
-def check_error_response(http_request, response_body: dict):
-    assert sorted(http_request.json()) == sorted(response_body)
+def check_body_response(http_request, response_body: dict):
+    assert http_request.json() == response_body
 
 
 @then(

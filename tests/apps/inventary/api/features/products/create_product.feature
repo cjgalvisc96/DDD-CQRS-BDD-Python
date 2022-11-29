@@ -12,13 +12,14 @@ Feature: Create a new product
         Then The response status code should be "422"
         And The response body should be:
             {
-                "detail": [
+            "detail":[
                     {
+                        "loc":["body","product_id"],
                         "msg":"product_id need to be a valid uuid",
-                        "type": "value_error" 
+                        "type":"value_error"
                     }
                 ]
-            } 
+            }
         And Logger DEBUG was called "3" time(s)
         And Logger INFO was called "2" time(s)
 
@@ -35,13 +36,14 @@ Feature: Create a new product
         Then The response status code should be "422"
         And The response body should be:
             {
-                "detail": [
+            "detail":[
                     {
+                        "loc":["body","status"],
                         "msg":"status needs to be 1 or 0",
-                        "type": "value_error" 
+                        "type":"value_error"
                     }
                 ]
-            } 
+            }
         And Logger DEBUG was called "3" time(s)
         And Logger INFO was called "2" time(s)
 
