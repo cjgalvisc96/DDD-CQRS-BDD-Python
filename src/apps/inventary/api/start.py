@@ -1,4 +1,4 @@
-from src.apps.inventary.api import InventaryAPI
+from src.apps.inventary.api import InventaryFastAPI
 from src.contexts.inventary import inventary_settings
 from src.contexts.inventary.products.infrastructure import (
     MemoryCacheService,
@@ -8,7 +8,7 @@ from src.contexts.inventary.products.infrastructure import (
 from src.contexts.shared.domain import DomainConstants
 from src.contexts.shared.infrastucture import LoggingLogger
 
-inventary_api = InventaryAPI(
+inventary_api = InventaryFastAPI(
     host=inventary_settings.API_HOST,
     port=inventary_settings.API_PORT,
     logger=LoggingLogger(

@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from pytest_bdd import given, parsers, then
 
-from src.apps.inventary.api.InventaryAPI import InventaryAPI
+from src.apps.inventary.api import InventaryFastAPI
 from src.contexts.inventary import inventary_settings
 from src.contexts.inventary.products.infrastructure import MemoryCacheService
 from src.contexts.shared.domain import DomainConstants
@@ -33,7 +33,7 @@ def memory_cache_service():
 
 @pytest.fixture
 def inventary_test_api(logging_logger_mock, memory_cache_service):
-    return InventaryAPI(
+    return InventaryFastAPI(
         host=inventary_settings.API_HOST,
         port=inventary_settings.API_PORT,
         logger=logging_logger_mock,
