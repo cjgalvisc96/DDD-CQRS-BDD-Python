@@ -19,7 +19,7 @@ async def apply_cache_in_status_field(
 ) -> ProductQueryIdDTO:
     cache = cache_service.get_cache()
     status_in_cache = await cache.get("Status")
-    if not status_in_cache:
+    if not status_in_cache or product.status != status_in_cache:
         await cache.set(
             key="Status",
             value=product.status,
