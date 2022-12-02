@@ -1,4 +1,4 @@
-# **TekTonLabsTest**
+# **DDD-CQRS-BDD-Python**
 ## **Installation**
 0. *Requirements =>*
     [Docker](https://docs.docker.com/engine/install/) and
@@ -42,6 +42,9 @@
 ```
 
 ## **Implementation**
+### **0. Summary**
+This project try to create a different actions (Create, Update and Read) for manage the prodcuts in a inventary, usign Clean Programming Practices like: Clena Architecture, CQRS(master/slave), TDD, BDD, SOLID, Desing Patters(Singlenton, Decorator, Factory, Repository)
+
 ### **1. Architecture**
 The architecture used to do scalable and maintainable the project was *Hexagonal architecture* and oriented to *Bounded contexts* desing; in this case the Bounded Context *Inventary* with the module *products*.
 
