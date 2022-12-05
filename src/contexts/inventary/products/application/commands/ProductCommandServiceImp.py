@@ -8,10 +8,7 @@ from .ProductUpdateCommand import ProductUpdateCommand
 
 
 class ProductCommandServiceImp(ProductCommandService):
-    def __init__(
-        self,
-        repository: ProductWriteRepository,
-    ):
+    def __init__(self, *, repository: ProductWriteRepository):
         self._repository = repository
 
     async def save(self, *, product_create_command: ProductCreateCommand):

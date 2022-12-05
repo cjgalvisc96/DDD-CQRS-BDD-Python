@@ -2,14 +2,12 @@ from random import randint
 
 import httpx
 
-from src.contexts.inventary import inventary_settings
-
 from .ExternalDiscountService import ExternalDiscountService
 
 
 class MockAPIIOExternalDiscountService(ExternalDiscountService):
-    def __init__(self) -> None:
-        self.url = inventary_settings.EXTERNAL_PARTY_SERVICE
+    def __init__(self, *, url: str) -> None:
+        self.url = url
 
     async def get_discount_percentage(self, *, product_id: str) -> int:
         async with httpx.AsyncClient() as client:

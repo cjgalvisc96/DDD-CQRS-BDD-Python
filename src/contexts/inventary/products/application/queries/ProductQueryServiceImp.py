@@ -10,6 +10,7 @@ from .ProductQueryService import ProductQueryService
 class ProductQueryServiceImp(ProductQueryService):
     def __init__(
         self,
+        *,
         repository: ProductReadRepository,
         external_discount_service: ExternalDiscountService,
     ):
