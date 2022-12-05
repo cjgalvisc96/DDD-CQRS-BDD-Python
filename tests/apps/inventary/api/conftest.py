@@ -28,7 +28,7 @@ def logging_logger_mock():
 
 @pytest.fixture
 def memory_cache_service():
-    return MemoryCacheService()
+    return MemoryCacheService(cache_ttl=inventary_settings.CACHE_TTL)
 
 
 @pytest.fixture

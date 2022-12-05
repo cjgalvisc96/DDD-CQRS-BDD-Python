@@ -8,7 +8,6 @@ from src.contexts.inventary.products.application import (
     ProductQueryIdDTO,
     ProductQueryService,
 )
-from src.contexts.inventary.products.infrastructure import MemoryCacheService
 from src.contexts.shared.infrastucture import CacheService
 
 router = APIRouter(prefix="", tags=["ReadProducts"])
@@ -45,7 +44,9 @@ class ProductQueryController:
                 ApplicationContainer.products_package.product_query_service
             ]
         ),
-        cache_service: CacheService = Depends(MemoryCacheService),
+        cache_service: CacheService = Depends(
+            Provide[ApplicationContainer.cache_service]
+        ),
     ):
         product = await product_query_service.find_product_by_id(
             product_id=str(product_id)

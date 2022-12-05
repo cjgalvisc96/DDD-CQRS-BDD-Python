@@ -1,13 +1,12 @@
 from fastapi_cache import CacheRegistry, caches, close_caches
 from fastapi_cache.backends.memory import CACHE_KEY, InMemoryCacheBackend
 
-from src.contexts.inventary.config import inventary_settings
-from src.contexts.shared.infrastucture import CacheService, Singlenton
+from src.contexts.shared.infrastucture import CacheService
 
 
-class MemoryCacheService(Singlenton, CacheService):
-    def __init__(self) -> None:
-        self.cache_ttl = inventary_settings.CACHE_TTL
+class MemoryCacheService(CacheService):
+    def __init__(self, *, cache_ttl: int) -> None:
+        self.cache_ttl = cache_ttl
 
     @staticmethod
     async def init():

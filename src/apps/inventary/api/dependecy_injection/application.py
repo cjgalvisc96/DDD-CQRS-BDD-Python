@@ -32,4 +32,6 @@ class ApplicationContainer(containers.DeclarativeContainer):
         db_url=inventary_settings.MONGO_URL,
         models=__beanie_models__,
     )
-    cache_service = providers.Singleton(MemoryCacheService)
+    cache_service = providers.Singleton(
+        MemoryCacheService, cache_ttl=inventary_settings.CACHE_TTL
+    )

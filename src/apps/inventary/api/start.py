@@ -1,19 +1,3 @@
-# inventary_api = InventaryFastAPI(
-#     host=inventary_settings.API_HOST,
-#     port=inventary_settings.API_PORT,
-#     logger=LoggingLogger(
-#         filename=DomainConstants["logger_filename"],
-#         name=DomainConstants["logger_name"],
-#         level=DomainConstants["logger_level"],
-#         format_=DomainConstants["logger_format"],
-#         date_format=DomainConstants["logger_date_format"],
-#     ),
-#     db=MongoConnection(
-#         db_url=inventary_settings.MONGO_URL, models=__beanie_models__
-#     ),
-#     cache_service=MemoryCacheService(),
-# )
-
 from dependency_injector.wiring import Provide, inject
 
 from src.apps.inventary.api import InventaryAPI, InventaryFastAPI
