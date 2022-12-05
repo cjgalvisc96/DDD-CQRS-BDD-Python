@@ -3,7 +3,7 @@ from uuid import UUID
 from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from src.apps.inventary.api.dependecy_injection import InventaryContainer
+from src.apps.inventary.api.dependecy_injection import ApplicationContainer
 from src.contexts.inventary.products.application import (
     ProductQueryIdDTO,
     ProductQueryService,
@@ -41,7 +41,9 @@ class ProductQueryController:
     async def get_product_by_id(
         product_id: UUID,
         product_query_service: ProductQueryService = Depends(
-            Provide[InventaryContainer.products_package.product_query_service]
+            Provide[
+                ApplicationContainer.products_package.product_query_service
+            ]
         ),
         cache_service: CacheService = Depends(MemoryCacheService),
     ):

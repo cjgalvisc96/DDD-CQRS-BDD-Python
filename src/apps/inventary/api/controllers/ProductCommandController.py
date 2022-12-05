@@ -3,7 +3,7 @@ from uuid import UUID
 from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends, status
 
-from src.apps.inventary.api.dependecy_injection import InventaryContainer
+from src.apps.inventary.api.dependecy_injection import ApplicationContainer
 from src.apps.inventary.api.validators import (
     ProductPostValidator,
     ProductPutValidator,
@@ -23,7 +23,9 @@ class ProductCommandController:
     async def create_product(
         product: ProductPostValidator,
         product_write_service: ProductCommandService = Depends(
-            Provide[InventaryContainer.products_package.product_write_service]
+            Provide[
+                ApplicationContainer.products_package.product_write_service
+            ]
         ),
     ):
         await product_write_service.save(
@@ -46,7 +48,9 @@ class ProductCommandController:
         product_id: UUID,
         product: ProductPutValidator,
         product_write_service: ProductCommandService = Depends(
-            Provide[InventaryContainer.products_package.product_write_service]
+            Provide[
+                ApplicationContainer.products_package.product_write_service
+            ]
         ),
     ):
         await product_write_service.update(

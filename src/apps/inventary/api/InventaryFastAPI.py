@@ -6,7 +6,7 @@ from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from src.apps.inventary.api.dependecy_injection import InventaryContainer
+from src.apps.inventary.api.dependecy_injection import ApplicationContainer
 from src.apps.inventary.api.routes import products_router
 from src.contexts.shared.domain import DomainException, Logger
 from src.contexts.shared.infrastucture import CacheService, DBConnection
@@ -33,7 +33,7 @@ class InventaryFastAPI(InventaryAPI):
         self._create_app()
 
     def _add_dependency_injection(self) -> None:
-        self.app.container = InventaryContainer()
+        self.app.container = ApplicationContainer()
 
     def _add_routers(self) -> None:
         self.app.include_router(router=products_router, prefix="/api")
