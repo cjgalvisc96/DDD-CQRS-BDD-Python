@@ -63,3 +63,7 @@ class ProductCommandController:
                 price=product.price,
             ),
         )
+
+
+container = ApplicationContainer()
+container.wire(modules=[__name__])

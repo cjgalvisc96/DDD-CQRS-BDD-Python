@@ -12,12 +12,6 @@ from src.contexts.shared.infrastucture import LoggingLogger
 
 
 class ApplicationContainer(containers.DeclarativeContainer):
-    wiring_config = containers.WiringConfiguration(
-        modules=[
-            "src.apps.inventary.api.controllers.ProductCommandController",
-            "src.apps.inventary.api.controllers.ProductQueryController",
-        ],
-    )
     products_package = providers.Container(ProductsContainer)
     logger_service = providers.Singleton(
         LoggingLogger,

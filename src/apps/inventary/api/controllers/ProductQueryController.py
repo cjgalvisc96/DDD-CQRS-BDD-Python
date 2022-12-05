@@ -62,3 +62,7 @@ class ProductQueryController:
         )
 
         return product_with_cache_applied_in_status_field
+
+
+container = ApplicationContainer()
+container.wire(modules=[__name__])
